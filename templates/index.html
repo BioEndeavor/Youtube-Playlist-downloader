@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        .btn {
+          background-color: DodgerBlue;
+          border: none;
+          color: white;
+          padding: 12px 30px;
+          cursor: pointer;
+          font-size: 20px;
+        }
+        
+        /* Darker background on mouse-over */
+        .btn:hover {
+          background-color: RoyalBlue;
+        }
+        .center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 20vh;
+}
+        </style>
+        </head>
+        
+    <body>
+        <div class="center">
+      <h1>YouTube Video and PlayList Downloader</h1>
+      <form class="grid" action = "/result" method = "POST">
+      Enter the URL<input type="text" name="URL" id="URL"><br><br>
+      <button class="btn"> Check </a></button><br>
+       </form>
+    </div>
+       <div class="center">
+        {%  if i|length == 1%}
+       <p><b>Title of the video:</b> {{i[0]}} </p>
+       <a href ="{{url_for('Downl')}}"><button class="btn" >Download</button></a>
+      {% else %}
+      {%  for t in i%}
+      {% if loop.index == 1%}
+     <br><br>
+     <a href ="{{url_for('Playi')}}"><button class="btn" >Download PlayList</button></a>
+     {% endif %}
+      <p><b>Title of the video:</b> {{t}}</p>
+      <a href ="/{{loop.index - 1}}" ><button class="btn">Download</button></a>
+     {%  endfor %}
+       {%  endif %}
+       </div>
+ 
+    
+    </body>
+</html>

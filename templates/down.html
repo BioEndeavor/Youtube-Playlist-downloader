@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <form action="/pdta" method="POST" enctype="multipart/form-data">
+      Enter the File : <input type="file" name="file">
+      <input type = "submit"/>
+      </form>
+      <div>      
+        {%if var is defined %}
+        <h1>{{var}}</h1>
+        {% endif %}
+      </div>
+  
+  </body>
+</html>
