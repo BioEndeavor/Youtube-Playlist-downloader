@@ -10,12 +10,18 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
+#Set a static path
 UPLOAD_FOLDER = 'C:/Users/joash/OneDrive/Desktop/YOutube/static'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+#Set random secret key for user sessions
 app.secret_key =  os.urandom(24)
+
+#Create the home page
 @app.route('/')
 def index():
     return render_template('home.html')
+
+#Create a page for youtube downloads
 @app.route('/Download')
 @app.route('/result',methods = ['POST','GET'])
 def r():
@@ -39,6 +45,7 @@ def r():
             return "Video download failed!"
     return render_template('index.html',i = s,URL = U,f = url)
 
+#The button when pressed executes this path
 @app.route('/Down/')
 def Downl():
     U = session.get('U',None)
@@ -47,6 +54,7 @@ def Downl():
     #path = p.split("//")[-1]  
     return send_file(p,as_attachment=True)
 
+#This path is for downloading the whole playlist
 @app.route('/Play')
 def Playi():
     U = session.get('U',None)
@@ -57,6 +65,7 @@ def Playi():
        return send_file(p,as_attachment=True)
 
 
+#This path is for downloading only selected videos from the playlist
 @app.route('/<int:ind>')
 def d(ind):
     y = []
@@ -66,6 +75,7 @@ def d(ind):
     p = YouTube(y[ind]).streams.get_highest_resolution().download()
     return send_file(p,as_attachment=True)
 
+#Pdf to audio
 @app.route('/pdf')
 def p():
     return render_template('down.html')
